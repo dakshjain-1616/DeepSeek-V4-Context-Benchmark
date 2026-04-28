@@ -1,6 +1,6 @@
 """Render the SVG charts shipped with the context-bench README.
 
-Pure stdlib — no matplotlib. Outputs five hand-built bar charts under
+Pure stdlib -- no matplotlib. Outputs five hand-built bar charts under
 ``assets/charts/`` summarizing the live numbers from ``results/live_*.json``
 and the live-OpenRouter pricing snapshot.
 """
@@ -99,7 +99,7 @@ def main() -> None:
     (out / "niah_depth.svg").write_text(
         _render(
             title="NIAH accuracy vs context length",
-            subtitle="deepseek/deepseek-v4-flash · n=3 (~93K, ~187K) · n=2 (~968K)",
+            subtitle="deepseek/deepseek-v4-flash - n=3 (~93K, ~187K) - n=2 (~968K)",
             labels=["~93K ctx", "~187K ctx", "~968K ctx"],
             values=[100.0, 100.0, 50.0],
             y_min=0,
@@ -107,14 +107,14 @@ def main() -> None:
             y_label="accuracy %",
             value_fmt="{:.0f}%",
             colors=[GOOD, GOOD, HIGHLIGHT],
-            legend="v4-pro and llama-4-scout both fall to 0 % at ~968K — see Findings.",
+            legend="v4-pro and llama-4-scout both fall to 0 % at ~968K -- see Findings.",
         )
     )
 
     (out / "cross_corpus.svg").write_text(
         _render(
-            title="Accuracy across corpora · small-context runs",
-            subtitle="3-model average · NIAH-93K, MultiHop, Codebase, Synthesis",
+            title="Accuracy across corpora - small-context runs",
+            subtitle="3-model average - NIAH-93K, MultiHop, Codebase, Synthesis",
             labels=["NIAH-93K", "MultiHop", "Codebase", "Synthesis"],
             values=[89.0, 100.0, 78.0, 100.0],
             y_min=0,
@@ -161,7 +161,7 @@ def main() -> None:
     (out / "cost_per_100.svg").write_text(
         _render(
             title="USD per 100 tasks at 100K input tokens / task",
-            subtitle="Live OpenRouter pricing snapshot · 2026-04-28",
+            subtitle="Live OpenRouter pricing snapshot - 2026-04-28",
             labels=["v4-flash", "v4-pro", "llama-4-scout"],
             values=[1.41, 4.40, 0.82],
             y_min=0,
@@ -172,7 +172,17 @@ def main() -> None:
         )
     )
 
-    print(f"wrote {len(list(out.glob('*.svg')))} SVG files to {out}/")
+    # Also render PNG copies — HuggingFace's markdown sanitizer drops <img>
+    # refs to *.svg, and a few corp GitHub deployments do too. We keep both
+    # formats so the README renders crisp on every surface.
+    try:
+        import cairosvg  # type: ignore[import-not-found]
+    except ImportError:
+        print(f"wrote {len(list(out.glob('*.svg')))} SVG files to {out}/  (skip PNG: install cairosvg to enable)")
+        return
+    for svg in out.glob("*.svg"):
+        cairosvg.svg2png(url=str(svg), write_to=str(svg.with_suffix(".png")), output_width=1440)
+    print(f"wrote {len(list(out.glob('*.svg')))} SVG + PNG pairs to {out}/")
 
 
 if __name__ == "__main__":

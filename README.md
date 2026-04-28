@@ -143,17 +143,17 @@ Live runs against OpenRouter on 2026-04-28, all using `--scorer contains`. Cell 
 
 ### NIAH depth ladder — accuracy vs. context length
 
-![NIAH accuracy vs context length](assets/charts/niah_depth.svg)
+![NIAH accuracy vs context length](assets/charts/niah_depth.png)
 
 (v4-flash line. v4-pro and llama-4-scout both fall to 0 % at ~968K — the API silently returns empty completions, see "Findings" below.)
 
 ### Cross-corpus comparison (small-context runs)
 
-![Accuracy across corpora](assets/charts/cross_corpus.svg)
+![Accuracy across corpora](assets/charts/cross_corpus.png)
 
 ### Latency by model on NIAH-93K
 
-![Latency by model](assets/charts/latency.svg)
+![Latency by model](assets/charts/latency.png)
 
 ### Findings (validated against the raw JSON in `results/`)
 
@@ -237,11 +237,11 @@ Each `dsv4ctx run` writes a JSON file under `results/` with this schema. The exa
 
 ### Token-budget per corpus
 
-![Per-task input tokens by corpus](assets/charts/token_budget.svg)
+![Per-task input tokens by corpus](assets/charts/token_budget.png)
 
 ### Cost per 100-task run (live OpenRouter pricing, 2026-04-28)
 
-![USD per 100 tasks at 100K input tokens](assets/charts/cost_per_100.svg)
+![USD per 100 tasks at 100K input tokens](assets/charts/cost_per_100.png)
 
 ## Project Structure
 

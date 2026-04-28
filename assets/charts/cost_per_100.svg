@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif">
 <rect width="720" height="380" fill="white"/>
 <text x="360.0" y="28" text-anchor="middle" font-size="18" font-weight="600" fill="#1f2933">USD per 100 tasks at 100K input tokens / task</text>
-<text x="360.0" y="48" text-anchor="middle" font-size="12" fill="#9aa5b1">Live OpenRouter pricing snapshot · 2026-04-28</text>
+<text x="360.0" y="48" text-anchor="middle" font-size="12" fill="#9aa5b1">Live OpenRouter pricing snapshot - 2026-04-28</text>
 <text x="22" y="185.0" text-anchor="middle" font-size="12" fill="#9aa5b1" transform="rotate(-90 22 185.0)">USD</text>
 <line x1="90" y1="310.0" x2="690" y2="310.0" stroke="#e4e7eb" stroke-width="1"/>
 <text x="82" y="314.0" text-anchor="end" font-size="11" fill="#9aa5b1">0.0</text>

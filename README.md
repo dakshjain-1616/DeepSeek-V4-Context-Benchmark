@@ -116,13 +116,15 @@ Tests code understanding in large synthetic code repositories.
 ### Synthetic Data
 Diverse synthetic content for comprehensive evaluation.
 
-## Pricing (April 2026)
+## Pricing
+
+Live OpenRouter prices snapshotted on 2026-04-28 (`GET /api/v1/models`):
 
 | Model | Input ($/1M) | Output ($/1M) | Max Context |
 |-------|--------------|---------------|-------------|
-| deepseek-v4-flash | $0.10 | $0.25 | 1M tokens |
-| deepseek-v4-pro | $0.50 | $1.50 | 1M tokens |
-| llama-4-scout | $0.15 | $0.40 | 1M tokens |
+| deepseek-v4-flash | $0.14 | $0.28 | 1M tokens |
+| deepseek-v4-pro   | $0.435 | $0.87 | 1M tokens |
+| llama-4-scout     | $0.08 | $0.30 | 1M tokens |
 
 ## Live Benchmark Results
 
@@ -130,46 +132,28 @@ Live runs against OpenRouter on 2026-04-28, all using `--scorer contains`. Cell 
 
 | Corpus | Setting | `deepseek/deepseek-v4-flash` | `deepseek/deepseek-v4-pro` | `meta-llama/llama-4-scout-17b-16e-instruct` |
 |---|---|---|---|---|
-| NIAH | `--max-tokens 50000` (~93K ctx)   | **100 %** (3/3) · 6.9 s · $0.028 | **100 %** (3/3) · 11.6 s · $0.142 | 67 % (2/3) · 7.4 s · $0.043 |
-| NIAH | `--max-tokens 100000` (~187K ctx) | **100 %** (3/3) · 10.8 s · $0.056 | **100 %** (3/3) · 24.5 s · $0.282 | 67 % (2/3) · 10.4 s · $0.085 |
-| NIAH | `--max-tokens 500000` (~968K ctx) | 50 % (1/2) · 127.6 s · $0.097 | **0 % empty** (0/2) · 85.8 s · $0.002 | **0 % empty** (0/2) · 10.7 s · $0.305 |
-| MultiHop | default (50 facts, 2 hops, ~5K ctx) | **100 %** (3/3) · 2.3 s · $0.0004 | **100 %** (3/3) · 6.8 s · $0.004 | **100 %** (3/3) · 0.5 s · $0.0006 |
-| Codebase | default (20 files, ~15K ctx) | 67 % (2/3) · 3.6 s · $0.005 | 67 % (2/3) · 14.2 s · $0.025 | **100 %** (3/3) · 2.4 s · $0.007 |
-| Synthesis | default (planted marker, ~10K ctx) | **100 %** (3/3) · 1.6 s · $0.002 | **100 %** (3/3) · 14.4 s · $0.008 | **100 %** (3/3) · 0.7 s · $0.002 |
+| NIAH | `--max-tokens 50000` (~93K ctx)   | **100 %** (3/3) · 6.9 s · $0.040 | **100 %** (3/3) · 11.6 s · $0.123 | 67 % (2/3) · 7.4 s · $0.023 |
+| NIAH | `--max-tokens 100000` (~187K ctx) | **100 %** (3/3) · 10.8 s · $0.079 | **100 %** (3/3) · 24.5 s · $0.246 | 67 % (2/3) · 10.4 s · $0.046 |
+| NIAH | `--max-tokens 500000` (~968K ctx) | 50 % (1/2) · 127.6 s · $0.137 | **0 % empty** (0/2) · 85.8 s · $0.000 | **0 % empty** (0/2) · 10.7 s · $0.167 |
+| MultiHop | default (50 facts, 2 hops, ~5K ctx) | **100 %** (3/3) · 2.3 s · $0.0001 | **100 %** (3/3) · 6.8 s · $0.0005 | **100 %** (3/3) · 0.5 s · $0.0001 |
+| Codebase | default (20 files, ~15K ctx) | 67 % (2/3) · 3.6 s · $0.0065 | 67 % (2/3) · 14.2 s · $0.021 | **100 %** (3/3) · 2.4 s · $0.0038 |
+| Synthesis | default (planted marker, ~10K ctx) | **100 %** (3/3) · 1.6 s · $0.0019 | **100 %** (3/3) · 14.4 s · $0.0060 | **100 %** (3/3) · 0.7 s · $0.0011 |
 
-**Total spend:** ~$1.09 across 51 live API calls. Raw JSON in `results/live_*.json`.
+**Total spend:** ~$0.90 across 51 live API calls (recomputed against the live OpenRouter prices above; assumes 99 %/1 % input/output token split, which matches these short-answer tasks). Raw JSON in `results/live_*.json` still carries the old estimate field — the recomputation script is at `scripts/recompute_costs.py`.
 
 ### NIAH depth ladder — accuracy vs. context length
 
-```mermaid
-xychart-beta
-    title "NIAH accuracy by context length"
-    x-axis ["~93K", "~187K", "~968K"]
-    y-axis "accuracy %" 0 100
-    bar [100, 100, 50]
-```
+![NIAH accuracy vs context length](assets/charts/niah_depth.svg)
 
 (v4-flash line. v4-pro and llama-4-scout both fall to 0 % at ~968K — the API silently returns empty completions, see "Findings" below.)
 
 ### Cross-corpus comparison (small-context runs)
 
-```mermaid
-xychart-beta
-    title "Accuracy across corpora (small context, all 3 models avg)"
-    x-axis ["NIAH-93K", "MultiHop", "Codebase", "Synthesis"]
-    y-axis "accuracy %" 0 100
-    bar [89, 100, 78, 100]
-```
+![Accuracy across corpora](assets/charts/cross_corpus.svg)
 
 ### Latency by model on NIAH-93K
 
-```mermaid
-xychart-beta
-    title "Avg latency at ~93K context (ms)"
-    x-axis ["v4-flash", "v4-pro", "llama-4-scout"]
-    y-axis "ms" 0 12000
-    bar [6905, 11616, 7380]
-```
+![Latency by model](assets/charts/latency.svg)
 
 ### Findings (validated against the raw JSON in `results/`)
 
@@ -253,23 +237,11 @@ Each `dsv4ctx run` writes a JSON file under `results/` with this schema. The exa
 
 ### Token-budget per corpus
 
-```mermaid
-xychart-beta
-    title "Per-task context tokens by corpus (typical)"
-    x-axis ["NIAH-100K", "NIAH-500K", "NIAH-1M", "MultiHop-500K", "Codebase-500K", "Synthesis-10doc"]
-    y-axis "tokens" 0 1100000
-    bar [100000, 500000, 1000000, 500000, 500000, 200000]
-```
+![Per-task input tokens by corpus](assets/charts/token_budget.svg)
 
-### Cost per 100-task run (estimated, April 2026 pricing)
+### Cost per 100-task run (live OpenRouter pricing, 2026-04-28)
 
-```mermaid
-xychart-beta
-    title "USD per 100 tasks at 100K input tokens / task"
-    x-axis ["v4-flash", "v4-pro", "llama-4-scout"]
-    y-axis "USD" 0 6
-    bar [1.0, 5.0, 1.5]
-```
+![USD per 100 tasks at 100K input tokens](assets/charts/cost_per_100.svg)
 
 ## Project Structure
 

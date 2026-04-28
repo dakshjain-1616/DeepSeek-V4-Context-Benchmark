@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="720" height="380" fill="white"/>
+<text x="360.0" y="28" text-anchor="middle" font-size="18" font-weight="600" fill="#1f2933">Per-task input tokens by corpus (typical)</text>
+<text x="360.0" y="48" text-anchor="middle" font-size="12" fill="#9aa5b1">What you'll send to the API per task at default settings</text>
+<text x="22" y="185.0" text-anchor="middle" font-size="12" fill="#9aa5b1" transform="rotate(-90 22 185.0)">K tokens</text>
+<line x1="90" y1="310.0" x2="690" y2="310.0" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="314.0" text-anchor="end" font-size="11" fill="#9aa5b1">0</text>
+<line x1="90" y1="247.5" x2="690" y2="247.5" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="251.5" text-anchor="end" font-size="11" fill="#9aa5b1">275</text>
+<line x1="90" y1="185.0" x2="690" y2="185.0" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="189.0" text-anchor="end" font-size="11" fill="#9aa5b1">550</text>
+<line x1="90" y1="122.5" x2="690" y2="122.5" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="126.5" text-anchor="end" font-size="11" fill="#9aa5b1">825</text>
+<line x1="90" y1="60.0" x2="690" y2="60.0" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="64.0" text-anchor="end" font-size="11" fill="#9aa5b1">1100</text>
+<line x1="90" y1="310.0" x2="690" y2="310.0" stroke="#9aa5b1" stroke-width="1.5"/>
+<rect x="112.5" y="287.27272727272725" width="55.00000000000001" height="22.727272727272748" fill="#4a90e2" rx="3"/>
+<text x="140.0" y="281.27272727272725" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">100K</text>
+<text x="140.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">NIAH-100K</text>
+<rect x="212.5" y="196.36363636363635" width="55.00000000000001" height="113.63636363636365" fill="#4a90e2" rx="3"/>
+<text x="240.0" y="190.36363636363635" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">500K</text>
+<text x="240.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">NIAH-500K</text>
+<rect x="312.5" y="82.72727272727273" width="55.00000000000001" height="227.27272727272725" fill="#d9534f" rx="3"/>
+<text x="340.0" y="76.72727272727273" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">1000K</text>
+<text x="340.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">NIAH-1M</text>
+<rect x="412.5" y="196.36363636363635" width="55.00000000000001" height="113.63636363636365" fill="#4a90e2" rx="3"/>
+<text x="440.0" y="190.36363636363635" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">500K</text>
+<text x="440.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">MultiHop-500K</text>
+<rect x="512.5" y="196.36363636363635" width="55.00000000000001" height="113.63636363636365" fill="#4a90e2" rx="3"/>
+<text x="540.0" y="190.36363636363635" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">500K</text>
+<text x="540.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">Codebase-500K</text>
+<rect x="612.5" y="264.5454545454545" width="55.00000000000001" height="45.454545454545496" fill="#4a90e2" rx="3"/>
+<text x="640.0" y="258.5454545454545" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">200K</text>
+<text x="640.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">Synthesis-10doc</text>
+</svg>

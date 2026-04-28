@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="720" height="380" fill="white"/>
+<text x="360.0" y="28" text-anchor="middle" font-size="18" font-weight="600" fill="#1f2933">NIAH accuracy vs context length</text>
+<text x="360.0" y="48" text-anchor="middle" font-size="12" fill="#9aa5b1">deepseek/deepseek-v4-flash · n=3 (~93K, ~187K) · n=2 (~968K)</text>
+<text x="22" y="185.0" text-anchor="middle" font-size="12" fill="#9aa5b1" transform="rotate(-90 22 185.0)">accuracy %</text>
+<line x1="90" y1="310.0" x2="690" y2="310.0" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="314.0" text-anchor="end" font-size="11" fill="#9aa5b1">0</text>
+<line x1="90" y1="247.5" x2="690" y2="247.5" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="251.5" text-anchor="end" font-size="11" fill="#9aa5b1">25</text>
+<line x1="90" y1="185.0" x2="690" y2="185.0" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="189.0" text-anchor="end" font-size="11" fill="#9aa5b1">50</text>
+<line x1="90" y1="122.5" x2="690" y2="122.5" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="126.5" text-anchor="end" font-size="11" fill="#9aa5b1">75</text>
+<line x1="90" y1="60.0" x2="690" y2="60.0" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="64.0" text-anchor="end" font-size="11" fill="#9aa5b1">100</text>
+<line x1="90" y1="310.0" x2="690" y2="310.0" stroke="#9aa5b1" stroke-width="1.5"/>
+<rect x="135.0" y="60.0" width="110.00000000000001" height="250.0" fill="#3aa55a" rx="3"/>
+<text x="190.0" y="54.0" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">100%</text>
+<text x="190.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">~93K ctx</text>
+<rect x="335.0" y="60.0" width="110.00000000000001" height="250.0" fill="#3aa55a" rx="3"/>
+<text x="390.0" y="54.0" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">100%</text>
+<text x="390.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">~187K ctx</text>
+<rect x="535.0" y="185.0" width="110.00000000000001" height="125.0" fill="#f5a623" rx="3"/>
+<text x="590.0" y="179.0" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">50%</text>
+<text x="590.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">~968K ctx</text>
+<text x="90" y="362" font-size="12" fill="#9aa5b1">v4-pro and llama-4-scout both fall to 0 % at ~968K — see Findings.</text>
+</svg>

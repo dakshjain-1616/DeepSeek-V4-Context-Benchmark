@@ -21,12 +21,12 @@ class ModelProvider(StrEnum):
     LLAMA_SCOUT = "meta-llama/llama-4-scout-17b-16e-instruct"
 
 
-# April 2026 pricing per 1M tokens (input/output) in USD
-# Source: OpenRouter pricing as of April 2026
+# Pricing per 1M tokens (input/output) in USD.
+# Source: live OpenRouter `/api/v1/models` snapshot taken on 2026-04-28.
 PRICING_TABLE: Final[dict[ModelProvider, tuple[float, float]]] = {
-    ModelProvider.DEEPSEEK_FLASH: (0.10, 0.25),  # $0.10 input, $0.25 output
-    ModelProvider.DEEPSEEK_PRO: (0.50, 1.50),  # $0.50 input, $1.50 output
-    ModelProvider.LLAMA_SCOUT: (0.15, 0.40),  # $0.15 input, $0.40 output
+    ModelProvider.DEEPSEEK_FLASH: (0.14, 0.28),     # deepseek/deepseek-v4-flash
+    ModelProvider.DEEPSEEK_PRO:   (0.435, 0.87),    # deepseek/deepseek-v4-pro
+    ModelProvider.LLAMA_SCOUT:    (0.08, 0.30),     # meta-llama/llama-4-scout
 }
 
 # Maximum context lengths per model (in tokens)

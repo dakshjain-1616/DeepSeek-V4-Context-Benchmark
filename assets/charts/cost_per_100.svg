@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="720" height="380" fill="white"/>
+<text x="360.0" y="28" text-anchor="middle" font-size="18" font-weight="600" fill="#1f2933">USD per 100 tasks at 100K input tokens / task</text>
+<text x="360.0" y="48" text-anchor="middle" font-size="12" fill="#9aa5b1">Live OpenRouter pricing snapshot · 2026-04-28</text>
+<text x="22" y="185.0" text-anchor="middle" font-size="12" fill="#9aa5b1" transform="rotate(-90 22 185.0)">USD</text>
+<line x1="90" y1="310.0" x2="690" y2="310.0" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="314.0" text-anchor="end" font-size="11" fill="#9aa5b1">0.0</text>
+<line x1="90" y1="247.5" x2="690" y2="247.5" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="251.5" text-anchor="end" font-size="11" fill="#9aa5b1">1.2</text>
+<line x1="90" y1="185.0" x2="690" y2="185.0" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="189.0" text-anchor="end" font-size="11" fill="#9aa5b1">2.5</text>
+<line x1="90" y1="122.5" x2="690" y2="122.5" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="126.5" text-anchor="end" font-size="11" fill="#9aa5b1">3.8</text>
+<line x1="90" y1="60.0" x2="690" y2="60.0" stroke="#e4e7eb" stroke-width="1"/>
+<text x="82" y="64.0" text-anchor="end" font-size="11" fill="#9aa5b1">5.0</text>
+<line x1="90" y1="310.0" x2="690" y2="310.0" stroke="#9aa5b1" stroke-width="1.5"/>
+<rect x="135.0" y="239.5" width="110.00000000000001" height="70.5" fill="#4a90e2" rx="3"/>
+<text x="190.0" y="233.5" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">$1.41</text>
+<text x="190.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">v4-flash</text>
+<rect x="335.0" y="89.99999999999997" width="110.00000000000001" height="220.00000000000003" fill="#f5a623" rx="3"/>
+<text x="390.0" y="83.99999999999997" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">$4.40</text>
+<text x="390.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">v4-pro</text>
+<rect x="535.0" y="269.0" width="110.00000000000001" height="41.0" fill="#3aa55a" rx="3"/>
+<text x="590.0" y="263.0" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">$0.82</text>
+<text x="590.0" y="332.0" text-anchor="middle" font-size="13" fill="#1f2933">llama-4-scout</text>
+</svg>

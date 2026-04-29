@@ -170,3 +170,40 @@ class TestSynthesisCorpus:
         )
         found = any(word.lower() in sample.content.lower() for word in vocab_words)
         assert found
+
+    def test_planted_marker_in_content(self):
+        """Test that the unique marker is physically present in the content."""
+        corpus = SynthesisCorpus(SynthesisConfig(seed=42, paragraphs=5))
+        sample = corpus.generate_single()
+        assert sample.expected_answer in sample.content
+
+    def test_expected_answer_matches_metadata_marker(self):
+        """Test that expected_answer equals metadata['planted_marker']."""
+        corpus = SynthesisCorpus(SynthesisConfig(seed=42, paragraphs=5))
+        sample = corpus.generate_single()
+        assert sample.expected_answer == sample.metadata["planted_marker"]
+
+    def test_metadata_has_entities_list(self):
+        """Test that metadata['entities'] is a populated list."""
+        corpus = SynthesisCorpus(SynthesisConfig(seed=42, paragraphs=5))
+        sample = corpus.generate_single()
+        assert "entities" in sample.metadata
+        assert isinstance(sample.metadata["entities"], list)
+        assert len(sample.metadata["entities"]) > 0
+
+    def test_different_seeds_produce_different_content(self):
+        """Test that different seeds produce different generated content."""
+        s1 = SynthesisCorpus(SynthesisConfig(seed=42, paragraphs=5)).generate_single()
+        s2 = SynthesisCorpus(SynthesisConfig(seed=99, paragraphs=5)).generate_single()
+        assert s1.content != s2.content
+
+    def test_content_grows_with_more_paragraphs(self):
+        """Test that requesting more paragraphs produces strictly longer content."""
+        short = SynthesisCorpus(SynthesisConfig(seed=42, paragraphs=5)).generate_single()
+        long = SynthesisCorpus(SynthesisConfig(seed=42, paragraphs=20)).generate_single()
+        assert len(long.content) > len(short.content)
+
+    def test_generate_zero_returns_empty_list(self):
+        """Test that generate(0) returns an empty list."""
+        corpus = SynthesisCorpus(SynthesisConfig(seed=42, paragraphs=5))
+        assert corpus.generate(0) == []

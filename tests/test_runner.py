@@ -31,8 +31,8 @@ class TestBudgetEstimator:
             1_000_000,
             1_000,
         )
-        # $0.10 per 1M input + $0.25 per 1M output
-        expected = 0.10 + 0.00025
+        # $0.14 per 1M input + $0.28 per 1M output
+        expected = 0.14 + 0.00028
         assert cost == pytest.approx(expected, rel=1e-6)
 
     def test_estimate_benchmark_cost(self, estimator):

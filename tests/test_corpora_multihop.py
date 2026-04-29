@@ -145,3 +145,57 @@ class TestMultiHopCorpus:
         person_found = any(p in sample.context for p in ENTITIES["person"])
         location_found = any(loc in sample.context for loc in ENTITIES["location"])
         assert person_found or location_found
+
+    def test_hop_count_equals_chain_length(self):
+        """Test that hop_count always equals len(reasoning_chain)."""
+        corpus = MultiHopCorpus(MultiHopConfig(seed=42, context_facts=50, num_hops=2))
+        samples = corpus.generate(5)
+        for sample in samples:
+            assert sample.hop_count == len(sample.reasoning_chain)
+
+    def test_reasoning_chain_step_has_required_keys(self):
+        """Test that every reasoning step contains the four required keys."""
+        corpus = MultiHopCorpus(MultiHopConfig(seed=42, context_facts=50, num_hops=2))
+        samples = corpus.generate(5)
+        required = {"fact", "from_entity", "to_entity", "relationship"}
+        for sample in samples:
+            for step in sample.reasoning_chain:
+                assert required.issubset(step.keys())
+
+    def test_different_seeds_produce_different_output(self):
+        """Test that changing the seed changes the generated output."""
+        corpus1 = MultiHopCorpus(MultiHopConfig(seed=42, context_facts=50))
+        corpus2 = MultiHopCorpus(MultiHopConfig(seed=99, context_facts=50))
+        s1 = corpus1.generate(1)
+        s2 = corpus2.generate(1)
+        if s1 and s2:
+            assert s1[0].context != s2[0].context or s1[0].question != s2[0].question
+
+    def test_context_has_minimum_words(self):
+        """Test that generated context has at least as many words as context_facts."""
+        corpus = MultiHopCorpus(MultiHopConfig(seed=42, context_facts=30))
+        sample = corpus.generate_single()
+        assert len(sample.context.split()) >= 30
+
+    def test_generate_uses_num_questions_when_no_arg(self):
+        """Test that generate() with no argument uses config.num_questions."""
+        corpus = MultiHopCorpus(MultiHopConfig(seed=42, context_facts=50, num_questions=3))
+        samples = corpus.generate()
+        assert len(samples) == 3
+
+    def test_reasoning_chain_entities_linked(self):
+        """Test that each step's to_entity is the next step's from_entity."""
+        corpus = MultiHopCorpus(MultiHopConfig(seed=42, context_facts=50, num_hops=2))
+        samples = corpus.generate(5)
+        for sample in samples:
+            chain = sample.reasoning_chain
+            for i in range(len(chain) - 1):
+                assert chain[i]["to_entity"] == chain[i + 1]["from_entity"]
+
+    def test_answer_matches_last_chain_to_entity(self):
+        """Test that sample.answer equals the final hop's target entity."""
+        corpus = MultiHopCorpus(MultiHopConfig(seed=42, context_facts=50, num_hops=2))
+        samples = corpus.generate(5)
+        for sample in samples:
+            if sample.reasoning_chain:
+                assert sample.answer == sample.reasoning_chain[-1]["to_entity"]

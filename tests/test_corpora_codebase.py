@@ -165,3 +165,46 @@ class TestCodebaseCorpus:
                 sample = corpus.generate_single()
                 for filename in sample.file_structure:
                     assert filename.endswith(ext)
+
+    def test_language_set_in_sample(self):
+        """Test that sample.language matches the configured language."""
+        for lang in ["python", "javascript", "typescript"]:
+            if lang in LANGUAGES:
+                corpus = CodebaseCorpus(CodebaseConfig(seed=42, language=lang, files_count=3))
+                sample = corpus.generate_single()
+                assert sample.language == lang
+
+    def test_all_standard_languages_in_constant(self):
+        """Test that the LANGUAGES constant contains every expected language."""
+        for lang in ["python", "javascript", "typescript", "java", "cpp", "rust"]:
+            assert lang in LANGUAGES
+
+    def test_file_count_matches_config(self):
+        """Test that file_structure length always equals files_count."""
+        for count in [3, 5, 10]:
+            corpus = CodebaseCorpus(CodebaseConfig(seed=42, files_count=count))
+            sample = corpus.generate_single()
+            assert len(sample.file_structure) == count
+
+    def test_code_has_file_section_markers(self):
+        """Test that combined code string contains per-file headers."""
+        corpus = CodebaseCorpus(CodebaseConfig(seed=42, files_count=3))
+        sample = corpus.generate_single()
+        assert "// File:" in sample.code
+
+    def test_pattern_locations_have_required_keys(self):
+        """Test that every pattern_locations entry has file, patterns and positions."""
+        corpus = CodebaseCorpus(CodebaseConfig(
+            seed=42, files_count=5, patterns_per_sample=2,
+        ))
+        sample = corpus.generate_single()
+        for loc in sample.pattern_locations:
+            assert "file" in loc
+            assert "patterns" in loc
+            assert "positions" in loc
+
+    def test_different_seeds_produce_different_code(self):
+        """Test that different seeds produce different generated code."""
+        s1 = CodebaseCorpus(CodebaseConfig(seed=42, files_count=3)).generate_single()
+        s2 = CodebaseCorpus(CodebaseConfig(seed=99, files_count=3)).generate_single()
+        assert s1.code != s2.code

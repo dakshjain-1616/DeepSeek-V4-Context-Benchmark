@@ -92,12 +92,12 @@ class TestBenchmarkConfig:
         cfg = BenchmarkConfig()
 
         flash_input, flash_output = cfg.get_model_pricing(ModelProvider.DEEPSEEK_FLASH)
-        assert flash_input == 0.10
-        assert flash_output == 0.25
+        assert flash_input == 0.14
+        assert flash_output == 0.28
 
         pro_input, pro_output = cfg.get_model_pricing(ModelProvider.DEEPSEEK_PRO)
-        assert pro_input == 0.50
-        assert pro_output == 1.50
+        assert pro_input == 0.435
+        assert pro_output == 0.87
 
     def test_estimate_cost(self):
         """Test cost estimation."""
@@ -105,7 +105,7 @@ class TestBenchmarkConfig:
 
         # Test with 1M input tokens and 1K output tokens
         cost = cfg.estimate_cost(ModelProvider.DEEPSEEK_FLASH, 1_000_000, 1_000)
-        expected = (1_000_000 / 1_000_000) * 0.10 + (1_000 / 1_000_000) * 0.25
+        expected = (1_000_000 / 1_000_000) * 0.14 + (1_000 / 1_000_000) * 0.28
         assert cost == pytest.approx(expected, rel=1e-6)
 
     def test_get_max_context_length(self):

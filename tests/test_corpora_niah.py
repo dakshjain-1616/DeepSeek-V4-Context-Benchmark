@@ -153,3 +153,47 @@ class TestNIAHCorpus:
 
         # Should contain some of the haystack sentences
         assert "The quick brown fox" in sample.text or "In 1492" in sample.text
+
+    def test_code_length_variation(self):
+        """Test that different code_length values produce codes of the correct length."""
+        for length in [4, 8, 12]:
+            corpus = NIAHCorpus(NIAHConfig(seed=42, code_length=length))
+            sample = corpus.generate_single()
+            assert len(sample.expected_answer) == length
+            assert sample.expected_answer.isalnum()
+            assert sample.expected_answer.isupper()
+
+    def test_needle_positions_count_matches_needle_count(self):
+        """Test that needle_positions has one entry per needle."""
+        for needle_count in [1, 2, 3]:
+            corpus = NIAHCorpus(NIAHConfig(
+                seed=42, haystack_sentences=100, needle_count=needle_count,
+            ))
+            sample = corpus.generate_single()
+            assert len(sample.needle_positions) == needle_count
+
+    def test_needle_text_contains_code(self):
+        """Test that each needle's text embeds the corresponding answer code."""
+        corpus = NIAHCorpus(NIAHConfig(seed=42, needle_count=3, haystack_sentences=50))
+        sample = corpus.generate_single()
+        for needle in sample.needles:
+            assert needle["answer"] in needle["text"]
+
+    def test_haystack_scales_with_sentence_count(self):
+        """Test that more haystack sentences produce a longer text."""
+        short = NIAHCorpus(NIAHConfig(seed=42, haystack_sentences=20)).generate_single()
+        long = NIAHCorpus(NIAHConfig(seed=42, haystack_sentences=100)).generate_single()
+        assert len(long.text) > len(short.text)
+
+    def test_generate_returns_exact_count(self):
+        """Test that generate(n) always returns exactly n samples."""
+        corpus = NIAHCorpus(NIAHConfig(seed=42, haystack_sentences=30))
+        for count in [1, 3, 5]:
+            samples = corpus.generate(count)
+            assert len(samples) == count
+
+    def test_expected_answer_is_first_needle_answer(self):
+        """Test that sample.expected_answer equals the first needle's answer."""
+        corpus = NIAHCorpus(NIAHConfig(seed=42, needle_count=3, haystack_sentences=50))
+        sample = corpus.generate_single()
+        assert sample.expected_answer == sample.needles[0]["answer"]

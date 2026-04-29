@@ -6,6 +6,16 @@
 
 A production-ready, first-mover 1M-token context benchmark for DeepSeek V4 comparing models via OpenRouter.
 
+## Infographics
+
+| Benchmark Results | Model Comparison |
+|:-:|:-:|
+| [![Benchmark Results](assets/infographics/benchmark_results.png)](assets/infographics/benchmark_results.png) | [![Model Comparison](assets/infographics/model_comparison.png)](assets/infographics/model_comparison.png) |
+
+| Corpus Types | Test Quality |
+|:-:|:-:|
+| [![Corpus Types](assets/infographics/corpus_types.png)](assets/infographics/corpus_types.png) | [![Testing Overview](assets/infographics/testing_overview.png)](assets/infographics/testing_overview.png) |
+
 ## Overview
 
 This benchmark evaluates large language models on their ability to process and reason over 1 million token contexts. It supports:

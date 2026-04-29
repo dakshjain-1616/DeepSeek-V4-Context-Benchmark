@@ -118,7 +118,7 @@ class TestSynthesisCorpus:
         sample = corpus.generate_single()
 
         assert sample.content_type == "narrative"
-        assert "Once upon a time" in sample.content or "lived" in sample.content
+        assert "Once upon a time" in sample.content
 
     def test_dialogue_content(self):
         """Test dialogue content generation."""
@@ -130,7 +130,7 @@ class TestSynthesisCorpus:
         sample = corpus.generate_single()
 
         assert sample.content_type == "dialogue"
-        assert '"' in sample.content or "said" in sample.content
+        assert '"' in sample.content and "said" in sample.content
 
     def test_structured_content(self):
         """Test structured data generation."""
@@ -142,8 +142,7 @@ class TestSynthesisCorpus:
         sample = corpus.generate_single()
 
         assert sample.content_type == "structured"
-        # Should contain JSON-like structure
-        assert "[" in sample.content or "{" in sample.content
+        assert "[" in sample.content and "{" in sample.content
 
     def test_metadata_populated(self):
         """Test that metadata is populated."""

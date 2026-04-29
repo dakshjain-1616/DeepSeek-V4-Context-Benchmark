@@ -124,7 +124,7 @@ class TestCodebaseCorpus:
                 assert len(sample.code) > 0
 
     def test_code_contains_patterns(self):
-        """Test that generated code contains patterns."""
+        """Test that generated code contains named patterns from CODE_PATTERNS."""
         corpus = CodebaseCorpus(CodebaseConfig(
             seed=42,
             language="python",
@@ -133,8 +133,7 @@ class TestCodebaseCorpus:
         ))
         sample = corpus.generate_single()
 
-        # Should contain some Python code patterns
-        assert "def " in sample.code or "class " in sample.code
+        assert "calculate_sum" in sample.code or "DataProcessor" in sample.code
 
     def test_pattern_locations_tracked(self):
         """Test that pattern locations are tracked."""

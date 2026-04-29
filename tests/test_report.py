@@ -47,7 +47,7 @@ class TestGenerateMarkdownReport:
         assert "# DeepSeek V4 Context Benchmark Report" in report
         assert "test-model" in report
         assert "niah" in report
-        assert "80.00%" in report or "0.8" in report
+        assert "80.00%" in report
 
     def test_empty_results(self):
         """Test report with empty results."""

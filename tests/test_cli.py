@@ -60,8 +60,7 @@ class TestCLI:
         """Test models command."""
         result = runner.invoke(cli, ["models"])
         assert result.exit_code == 0
-        # Should show model pricing table
-        assert "deepseek" in result.output.lower() or "llama" in result.output.lower()
+        assert "deepseek" in result.output.lower() and "llama" in result.output.lower()
 
     def test_estimate_command(self, runner):
         """Test estimate command."""
@@ -72,7 +71,7 @@ class TestCLI:
             "--tokens", "1000",
         ])
         assert result.exit_code == 0
-        assert "Cost" in result.output or "cost" in result.output
+        assert "Cost" in result.output
 
     def test_card_command(self, runner, tmp_path):
         """Test card command."""
@@ -108,7 +107,7 @@ class TestCLI:
             "--dry-run",
         ])
         assert result.exit_code == 0
-        assert "DRY RUN" in result.output or "Benchmark complete" in result.output
+        assert "Benchmark complete" in result.output
 
     def test_run_command_verbose(self, runner):
         """Test run command with verbose flag."""

@@ -97,7 +97,7 @@ class TestTokenizer:
         question = "What is this?"
         messages = tokenizer.build_context_prompt(context, question)
 
-        assert len(messages) >= 1
+        assert len(messages) == 1
         assert "context" in messages[0]["content"].lower()
         assert "question" in messages[0]["content"].lower()
 

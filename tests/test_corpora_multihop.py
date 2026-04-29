@@ -109,8 +109,7 @@ class TestMultiHopCorpus:
         samples = corpus.generate(5)
 
         for sample in samples:
-            # Answer should be an entity name that appears in context
-            assert sample.answer in sample.context or len(sample.answer) > 0
+            assert sample.answer in sample.context
 
     def test_different_hop_counts(self):
         """Test different hop count configurations."""
@@ -123,8 +122,10 @@ class TestMultiHopCorpus:
             samples = corpus.generate(3)
 
             for sample in samples:
-                # Should have at least the requested hops (or close to it)
-                assert sample.hop_count >= 1
+                if hops <= 2:
+                    assert sample.hop_count == hops
+                else:
+                    assert sample.hop_count >= 1
 
     def test_context_contains_facts(self):
         """Test that context contains factual statements."""

@@ -36,15 +36,15 @@ class TestGenerateDatasetCard:
         """Test that card contains corpus types."""
         card = generate_dataset_card()
         assert "NIAH" in card
-        assert "Multi-hop" in card or "multihop" in card.lower()
-        assert "Codebase" in card or "codebase" in card.lower()
-        assert "Synthetic" in card or "synthesis" in card.lower()
+        assert "Multi-hop Reasoning" in card
+        assert "Codebase Analysis" in card
+        assert "Synthetic Data" in card
 
     def test_contains_pricing(self):
         """Test that card contains pricing information."""
         card = generate_dataset_card()
-        assert "$0.10" in card or "$0.50" in card
-        assert "1M tokens" in card or "1M" in card
+        assert "$0.10" in card
+        assert "1M tokens" in card
 
     def test_contains_usage_examples(self):
         """Test that card contains usage examples."""
@@ -55,13 +55,14 @@ class TestGenerateDatasetCard:
     def test_contains_citation(self):
         """Test that card contains citation information."""
         card = generate_dataset_card()
-        assert "@software" in card or "bibtex" in card.lower()
+        assert "@software" in card
+        assert "bibtex" in card.lower()
         assert "deepseek_v4_context_bench" in card
 
     def test_contains_architecture_diagram(self):
         """Test that card contains architecture diagram."""
         card = generate_dataset_card()
-        assert "mermaid" in card or "graph" in card.lower()
+        assert "mermaid" in card
 
 
 class TestGenerateModelCard:
@@ -80,8 +81,8 @@ class TestGenerateModelCard:
         }
         card = generate_model_card("test-model", results)
         assert "test-model" in card
-        assert "85.00%" in card or "0.85" in card
-        assert "150.0" in card or "150" in card
+        assert "85.00%" in card
+        assert "150.0" in card
 
     def test_contains_performance_metrics(self):
         """Test that card contains performance metrics."""
@@ -103,10 +104,10 @@ class TestGenerateModelCard:
         """Test that card contains corpus breakdown."""
         results = {"statistics": {}}
         card = generate_model_card("model", results)
-        assert "Corpus Breakdown" in card or "corpus" in card.lower()
+        assert "Corpus Breakdown" in card
 
     def test_contains_context_length_performance(self):
         """Test that card contains context length performance."""
         results = {"statistics": {}}
         card = generate_model_card("model", results)
-        assert "Context Length" in card or "context" in card.lower()
+        assert "Context Length" in card

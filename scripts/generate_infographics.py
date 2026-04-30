@@ -301,7 +301,7 @@ def make_testing_infographic():
                    "report", "tokenizer", "scorer",
                    "client", "multihop", "synthesis",
                    "runner", "cli"]
-    cov_vals = [100, 100, 100, 100, 98, 97, 94, 93, 95, 91, 82, 82]
+    cov_vals = [100, 100, 100, 100, 98, 97, 94, 93, 91, 91, 82, 82]
     colors3 = [LLAMA if v >= 95 else FLASH if v >= 85 else ACCENT
                for v in cov_vals]
 
@@ -374,7 +374,7 @@ def make_testing_infographic():
         (LLAMA,  "Report: `80.00%` exact (not `or 0.8`)"),
         (LLAMA,  "Tokenizer: `len == 1` (not `>= 1`)"),
         (LLAMA,  "CLI: both `deepseek and llama` required"),
-        (FLASH,  "3-hop documented limitation (structurally impossible)"),
+        (LLAMA,  "3-hop chains fixed: entity parity split resolved"),
     ]
     for i, (col, text) in enumerate(fixes):
         y = 0.93 - i * 0.086

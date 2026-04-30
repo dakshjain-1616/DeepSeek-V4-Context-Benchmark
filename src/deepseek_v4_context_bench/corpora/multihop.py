@@ -140,8 +140,17 @@ class MultiHopCorpus:
             "studied_at":      ("person", "organization"),
         }
         a_type, b_type = type_map.get(rel_type, ("person", "organization"))
-        entity_a = self._get_entity(a_type, fact_id)
-        entity_b = self._get_entity(b_type, fact_id + 100)
+
+        # Use the corpus RNG rather than a deterministic index formula.
+        # The formula `entities[(fact_id + 100) % len]` creates a fixed parity
+        # split: for len-10 types (org, product) the offset is zero, so
+        # entity_b indices are always even/odd and entity_a indices for the
+        # *next* relationship type are always odd/even — permanently disjoint.
+        # That makes the only valid 3-hop path (person→org→product→location)
+        # structurally impossible because no product can appear as both the
+        # target of "created" and the source of "manufactured_in".
+        entity_a = self.rng.choice(ENTITIES[a_type])
+        entity_b = self.rng.choice(ENTITIES[b_type])
 
         fact_text = template.format(**{a_type: entity_a, b_type: entity_b})
         return fact_text, entity_a, entity_b, rel_type

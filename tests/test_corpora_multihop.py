@@ -121,11 +121,9 @@ class TestMultiHopCorpus:
             ))
             samples = corpus.generate(3)
 
+            assert len(samples) == 3, f"expected 3 samples for {hops}-hop config, got {len(samples)}"
             for sample in samples:
-                if hops <= 2:
-                    assert sample.hop_count == hops
-                else:
-                    assert sample.hop_count >= 1
+                assert sample.hop_count == hops
 
     def test_context_contains_facts(self):
         """Test that context contains factual statements."""

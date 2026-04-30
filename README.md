@@ -51,7 +51,7 @@ graph TD
 
 ```bash
 # Clone the repository
-git clone https://github.com/neo/deepseek-v4-context-bench.git
+git clone https://github.com/dakshjain-1616/DeepSeek-V4-Context-Benchmark.git
 cd deepseek-v4-context-bench
 
 # Install with uv
@@ -338,6 +338,6 @@ MIT License - See LICENSE file for details.
   author = {NEO},
   year = {2026},
   month = {4},
-  url = {https://github.com/neo/deepseek-v4-context-bench}
+  url = {https://github.com/dakshjain-1616/DeepSeek-V4-Context-Benchmark}
 }
 ```

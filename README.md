@@ -8,13 +8,17 @@ A production-ready, first-mover 1M-token context benchmark for DeepSeek V4 compa
 
 ## Infographics
 
-| Benchmark Results | Model Comparison |
-|:-:|:-:|
-| [![Benchmark Results](assets/infographics/benchmark_results.png)](assets/infographics/benchmark_results.png) | [![Model Comparison](assets/infographics/model_comparison.png)](assets/infographics/model_comparison.png) |
+### Benchmark Results
+[![Benchmark Results](assets/infographics/benchmark_results.png)](assets/infographics/benchmark_results.png)
 
-| Corpus Types | Test Quality |
-|:-:|:-:|
-| [![Corpus Types](assets/infographics/corpus_types.png)](assets/infographics/corpus_types.png) | [![Testing Overview](assets/infographics/testing_overview.png)](assets/infographics/testing_overview.png) |
+### Model Comparison
+[![Model Comparison](assets/infographics/model_comparison.png)](assets/infographics/model_comparison.png)
+
+### Corpus Types
+[![Corpus Types](assets/infographics/corpus_types.png)](assets/infographics/corpus_types.png)
+
+### Test Quality
+[![Testing Overview](assets/infographics/testing_overview.png)](assets/infographics/testing_overview.png)
 
 ## Overview
 

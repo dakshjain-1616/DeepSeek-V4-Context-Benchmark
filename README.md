@@ -242,20 +242,6 @@ When run with a valid API key, the benchmark produces real results (values will 
 
 > **Note**: Without an API key, the benchmark runs in dry-run mode and returns mock predictions with 0% accuracy. To see live results, you must set `OPENROUTER_API_KEY` and omit `--dry-run`.
 
-### NIAH depth ladder — accuracy vs. context length
-
-![NIAH accuracy vs context length](assets/charts/niah_depth.png)
-
-(v4-flash line. v4-pro and llama-4-scout both fall to 0 % at ~968K — the API silently returns empty completions, see "Findings" below.)
-
-### Cross-corpus comparison (small-context runs)
-
-![Accuracy across corpora](assets/charts/cross_corpus.png)
-
-### Latency by model on NIAH-93K
-
-![Latency by model](assets/charts/latency.png)
-
 ### Findings (validated against live OpenRouter results on 2026-05-01)
 
 1. **DeepSeek V4 Flash dominates small-to-medium contexts**: Achieved 100% accuracy on NIAH retrieval and synthesis tasks, with excellent speed/cost balance (~$0.05 per 4 tasks vs $0.12 for Pro).
@@ -289,13 +275,6 @@ export DSV4CTX_OPENROUTER_API_KEY=sk-or-v1-...
 #     dsv4ctx run -m "$m" -c "$c" -n 3 --max-tokens 50000 --scorer contains \
 #       -o "results/live_${short}_${c}.json" &
 #   done
-# done; wait
-
-# NIAH depth ladder (example command - would incur actual API costs)
-# for m in deepseek/deepseek-v4-flash deepseek/deepseek-v4-pro meta-llama/llama-4-scout-17b-16e-instruct; do
-#   short=$(echo "$m" | sed 's|.*/||;s|-17b-16e-instruct||;s|deepseek-||')
-#   dsv4ctx run -m "$m" -c niah -n 3 --max-tokens 100000 --scorer contains -o "results/live_${short}_niah_100k.json" &
-#   dsv4ctx run -m "$m" -c niah -n 2 --max-tokens 500000 --scorer contains -o "results/live_${short}_niah_500k.json" &
 # done; wait
 ```
 
